@@ -6,16 +6,18 @@
 In this project I walk through how to create an Active Directory using Oracle Virtual Box. Being able to configure and run this lab will help to develop an understanding of how Acitve Directory and Windows networking works. I will be utilizing powershell as part of this project as well. This project aims to boost competencies in Active Directory, PowerShell, Windows Server, and Virtualization (Oracle VirtualBox).
 <br />
 
-
 <h2>Languages and Utilities Used</h2>
 
 - <b>PowerShell</b> 
 - <b>Oracle VirtualBox</b>
+- <b>Active Directory</b>
 
 <h2>Environments Used </h2>
 
 - <b>Windows 10</b> (21H2)
 - <b>Windows Server 2019</b>
+
+<h2>Pre-Setup</h2>
 
 <h2>Program walk-through:</h2>
 
