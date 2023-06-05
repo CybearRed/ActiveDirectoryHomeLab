@@ -19,6 +19,27 @@ In this project I walk through how to create an Active Directory using Oracle Vi
 
 <h2>Pre-Setup</h2>
 
+<b>Step 1: Download the ISO files for Windows Server 2019 and Windows 10</b>
+
+<b>Step 2: Download and install Oracle VirtualBox</b>
+
+<b>Step 3: Install the Server 2019 ISO on Oracle VB. Name it something to reference it as the direct controller. Configure settings as such:</b>
+ 
+ - Network > Enable Network Adapter 1 and set it to NAT > Enable Network Adapter 2 and set it to Internal Network (It will be set to 'intnet' which is fine)
+
+ - You'll have to configure the Storage and System (CPUs, RAM, and HDD) to run the OS on the VM. (Rule of thumb: CPUs = 2 is really enough to start. RAM = 2048mb which is 2GB of RAM. 20~25GB of memory is good to start)
+
+ - Once the settings have been configured in VB, start the machine and install the Windows Server 2019 ISO. (Select standard desktop experience) (Custom Installation)  
+ 
+<b>Step 4: Install the Windows 10 OS (64 bit) on Oracle VB. Name it something to reference it as the client. Configure settings as such:</b>
+  
+ - Network > Enable Network Adapter 1 and make sure it's set to Internal Network (It will be set to 'intnet' which is fine)
+  
+ - You'll have to configure the Storage and System (CPUs, RAM, and HDD) to run the OS on the VM. (Rule of thumb: CPUs = 2 is really enough to start. RAM = 2048mb which is 2GB of RAM. 20~25GB of memory is good to start)
+
+ - Once the settings have been configured in VB, start the machine and install the Windows Server 2019 ISO. (Select standard desktop experience) (Custom Installation)
+
+
 <h2>Program walk-through:</h2>
 
 <p align="center">
