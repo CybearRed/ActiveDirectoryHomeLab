@@ -80,10 +80,10 @@ This is a network map that's going to act as our guide for setting up active dir
 	 and walkthrough purposes) select Next > Create Password, Next > Next through everything until you get to 'Install.' The system will restart once it's complete and you should now see a MYDOMAIN/Administrator title on the login
 	screen. 
 <br />
-<img src="https://i.imgur.com/nCIbXbg.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/yNZZx1X.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-Confirm your selection:  <br/>
+<b>Step 4:</b> Build our own dedicated admin account  
 <img src="https://i.imgur.com/cdFHBiU.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
