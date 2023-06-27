@@ -83,11 +83,35 @@ This is a network map that's going to act as our guide for setting up active dir
 <img src="https://i.imgur.com/yNZZx1X.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<b>Step 4:</b> Build our own dedicated admin account  
-<img src="https://i.imgur.com/cdFHBiU.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<b>Step 4:</b> BUILD OUR OWN DEDICATED ADMIN ACCOUNT
+
+  - Start > Administrative Tools > Active Directory Users and Computers. Select the newly created mydomain.com on the left hand side. Right click and create new organization unit to put admin account in (_ADMINS). Right Click 
+	 the new _ADMINS folder and create a new user. For naming conventions, typically you want to refer to what your company's policy is on how they want naming conventions to work. For example, some companies will typically
+	 say j.doe@company.com, or jane.doe@company.com, or jdoe@company.com. IN this case I'll use a (to indicate admin user) and first initial last name to indicate myself as the admin user for this domain (a-nwalker@mydomain.com).
+	 Because this is a LAB environment, I'm setting the password to never expire. Typically you DO not want to have this set up, you'll need to refer to your company's security policy on password usage, but in MOST corporate
+	 organizations you'll want to have a security feature. *It's ALWAYS best practice to change your password often and to use passphrases as opposed to words*
+
+   - Now that we've created the user, we need to officially make it an admin user. Right click the new user name created > properties > member of > Add > Type: Domain Admins in the box and select 'check name' > apply > and it
+	 should bring you back to the screen with the user name showing now as an admin user.
+
+   - Let's Test It! Log out of the domain controller. Select other user. Input the admins username and password that we just created to log in! 
+<br />
+<img src="https://i.imgur.com/G3FtvRD.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-Wait for process to complete (may take some time):  <br/>
+<b>Step 5:</b> INSTALL RAS/NAT (Remote Access Server/Network Address Translation)  *Purpose is that when we create the Windows 10 Client, it'll allow it to be on a private virtual network and we can access the internet THROUGH the
+	Domain Controller*
+
+   - Server Manager > Add Roles and Features > Next until you get to server roles and then select Remote Access > Next until you get to role services and select 'Routing' (DirectAccess and VPN (RAS) will auto select) > Next 
+	 everything until you get to 'install.'
+
+   - Once it's finished installing, close the window. Then head up to the server manager dashboard and select Tools > Routing and Remote Access > Right click the 'DOMAIN CONTROLLER(local)' Indicated with a red arrow > Configure
+	 Enable Routing and Remote Access > Setup wizard appears: next > Configuration - we want NAT to allow internal clients to connect to the itnernet using one public IP address > NAT Internet Connection, you want to select the use
+	 this public interface to connnect to the internt. Here you will see where we renamed our network types at the beginng. This is so we can see which one had the internet connection and then select that option here to move forward.
+
+   - Once we finish, the 'DOMAINCONTROLLER(local)' should now be indicated by a GREEN arrow meaning we've successfully configured it.
+<br />
+<br />
 <img src="https://i.imgur.com/JL945Ga.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
