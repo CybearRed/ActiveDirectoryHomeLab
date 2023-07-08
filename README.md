@@ -112,15 +112,77 @@ This is a network map that's going to act as our guide for setting up active dir
    - Once we finish, the 'DOMAINCONTROLLER(local)' should now be indicated by a GREEN arrow meaning we've successfully configured it.
 <br />
 <br />
-<img src="https://i.imgur.com/JL945Ga.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/BgRETsX.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-Sanitization complete:  <br/>
-<img src="https://i.imgur.com/K71yaM2.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<b>Step 6:</b> SET UP DHCP SERVER ON DOMAIN CONTROLLER *This will allow the clients on the windows 10 server to obtain an IP address that will allow them internet access*
+
+   - Server Manager Dashboard > Add Roles and features > Select DHCP Server > Next through everything until you get to 'install.'
+     
+   - Once DHCP is installed, go to tools in the server manager dashboard > DHCP > DHCP window will open so we can set up our scope. In the DHCP Window > view dropdown for domaincontroller > Right click IPV4 > New Scope. 
+	 I'm naming the range 169.254.207.100-200 becasue that's what we're going to set our DHCP range to. Select Next. Set the starting IP: 169.254.207.100 and End IP: 169.254.207.200 and the length to 24 > it'll ask about
+	 IP address exclusions within the range we set. We don't need to add any exlusions. > Lease Duration: This is how long the client will have the IP address before it refreshes. This depends on the use case for it. 
+	 Important to note that if the IP has a lease duration of 8 days and lets say they were on a Starbuck's server, that IP the user is using is tied up for 8 days. In that scenario, 2 hours would be more accurate for that use. Sense 
+	 we are in a lab, we can just set the IP for a further out time so 8 days is okay to use for now. > select 'yes' to configure > This is where we will enter the domain controller's IP address because the Domain controller is
+	 configured for DNS to access the internet when we installed Active Directory.
+
+<br/>
+<br/>
+<img src="https://i.imgur.com/rf402nm.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-Observe the wiped disk:  <br/>
-<img src="https://i.imgur.com/AeZkvFQ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<b>Step 7:</b> NEED TO SET UP ROLE/FEATURE TO BROWSE THE INTERNET FROM DOMAIN CONTROLLER *Normally you DON'T want to do this in a production environment, but in a lab setting it's fine*
+
+   - Server manager > Configure Local Server >  Internet Explorer Ehanced Security Configuration (Turn off otherwise it'll spam you everytime you try to load a webpage. *Again inside a virtual environment and lab, it's okay
+	 to turn off this setting* 
+
+   - https//github.com/joshmadakor1/AD_PS/archive/master.zip - This is a file pulled from Josh Madakor on GitHub specifically for this tutorial. He created an accounts script that we're going to use in conjunction with powershell
+	 to create users for the windows client. (Also Josh Madakor is an incredible resource for learning more about Cybersecurity and Info Sec roles). Save the file to the desktop, extract it, then open it. Pull up the names list
+	 add your name to the top.
+
+<img src="https://i.imgur.com/Bheso3k.png" height="60%" width="30%" alt="Disk Sanitization Steps"/>
+
+   - Click start > windows powershell > Windows Powershell ISE > More > Run as administrator. Windows PowerShell ISE will open up! Go to open, select the file we just downloaded from the desktop, then select the CREATE_USERS
+	 File. (We're in a lab so this is fine, but we want to make it so we can run the script. For that you would go to the command line and type 'Set-ExecutionPolicy Unrestricted' and say yes to all. Again, it's security feature
+	 but in this instance, in a LAB, we are okay)
+
+<img src="https://i.imgur.com/O3kB1aJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+<img src="https://i.imgur.com/88TJagv.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+- Now we can run PowerShell with the contents of the file. Let's go into the directory first on the command line: cd C:\users\a-nwalker\desktop\AD_PS-master
+  
+- Hit enter. We should be in the file we need on the next command line listed as ....\AD_PS-master. Now we want to see the contents of the file so type ls and enter to display the list of contents.
+
+<img src="https://i.imgur.com/0il3rNJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+  
+- Here we see the name.txt file, .ps1 file, etc. When we execute it should create a list of all the users from the file. So hit run and you'll see the list of names start to generate! Also, if you pull up the Active
+	 Directory Users and Computers from the Tools tab in the Server Managaer Dashboard, just right click and refresh 'mydomain.com' and you'll see the _USERS file listed, and if you click into it you'll see the list of names
+	 getting added to that _USERS file! 
+
+<br/>
+<br/>
+<img src="https://i.imgur.com/QwTuNRZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+<p align="center">
+<b>IN WINDOWS 10 CLIENT</b>  <br/>
+<br/>
+<br/>
+
+ <b>Step 8:</b> TEST FOR INTERNET CONNECTION IN WINDOWS 10 CLIENT
+
+- Open the command prompt on the windows 10 client. test by typing ipconfig and hitting enter. If you come up with no Default gateway, you may need
+	to return to the Server 2019 OS, under DHCP right click server options and add 'router.' It'll prompt you to put in the Internal client IP address that we used in the beginning. Enter it and then add, and apply. Restart the
+	tasks by right clicking the server. This should resolve the issue. Go back to the Windows 10 client and try to do an ipconfig /renew. See if that works.
+
+ <b>Step 9:</b> ONCE CONNECTED, JOIN THE DOMAIN AND CHANGE THE NAME OF THE CLIENT COMPUTER
+
+   - Right click start > system > scroll to the bottom to rename this computer (advanced) > Computer Name/Domain Changes (Chance name to Client1 for our purposes, and switch member of to domain: mydomain.com), create a username
+	 and password (from our list we created, I put my normal username in as nwalker and password that was created throughout). 
+
+  - If we go back to our 2019 Server we can check the DHCP Address Leases and see the Client1 listed. The same goes for the Active Directory Users and Computers, you'll see CLIENT1 listed. This means we are now able to login
+	from the client computer using any of the listed names we created and a password.
+
 </p>
 
 <!--
