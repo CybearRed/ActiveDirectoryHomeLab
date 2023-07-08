@@ -91,6 +91,8 @@ This is a network map that's going to act as our guide for setting up active dir
 	 Because this is a LAB environment, I'm setting the password to never expire. Typically you DO not want to have this set up, you'll need to refer to your company's security policy on password usage, but in MOST corporate
 	 organizations you'll want to have a security feature. *It's ALWAYS best practice to change your password often and to use passphrases as opposed to words*
 
+<img src="https://i.imgur.com/0AxmjKY.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
    - Now that we've created the user, we need to officially make it an admin user. Right click the new user name created > properties > member of > Add > Type: Domain Admins in the box and select 'check name' > apply > and it
 	 should bring you back to the screen with the user name showing now as an admin user.
 
@@ -175,6 +177,8 @@ This is a network map that's going to act as our guide for setting up active dir
 	to return to the Server 2019 OS, under DHCP right click server options and add 'router.' It'll prompt you to put in the Internal client IP address that we used in the beginning. Enter it and then add, and apply. Restart the
 	tasks by right clicking the server. This should resolve the issue. Go back to the Windows 10 client and try to do an ipconfig /renew. See if that works.
 
+<img src="https://i.imgur.com/ED2GnwG.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
  <b>Step 9:</b> ONCE CONNECTED, JOIN THE DOMAIN AND CHANGE THE NAME OF THE CLIENT COMPUTER
 
    - Right click start > system > scroll to the bottom to rename this computer (advanced) > Computer Name/Domain Changes (Chance name to Client1 for our purposes, and switch member of to domain: mydomain.com), create a username
@@ -182,6 +186,16 @@ This is a network map that's going to act as our guide for setting up active dir
 
   - If we go back to our 2019 Server we can check the DHCP Address Leases and see the Client1 listed. The same goes for the Active Directory Users and Computers, you'll see CLIENT1 listed. This means we are now able to login
 	from the client computer using any of the listed names we created and a password.
+
+<img src="https://i.imgur.com/jVamDMe.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+  - Finally, we can verify the client is connected to the domain controller by opening the command prompt and typing whoami with the result being mydomain\nwalker.
+
+<img src="https://i.imgur.com/tgkD9KE.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+ONE FINAL NOTE: We are also able to conduct a search in AD to find ourselves or any name in a given list of names for the directory.
+
+<img src="https://i.imgur.com/iPLrXzt.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
 </p>
 
